@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace MDotNetCore.ConsoleApp.Models
 {
-    [Table("Painting")]
+    [Table("Tbl_Painting")]
     public class PaintingModel
     {
         [Key]
-        [Column("Id")]
+        [Column("PaintingId")]
         public int PaintingId { get; set; }
 
-        [Column("Name")]
-        public string PaintingName { get; set; }
+        [Column("PaintingName")]
+        public string? PaintingName { get; set; }
 
-        [Column("Type")]
-        public string PaintingType { get; set; }
+        [Column("PaintingType")]
+        public string? PaintingType { get; set; }
 
-        [Column("Price")]
+        [Column("PaintingPrice")]
         public decimal PaintingPrice { get; set; }
 
     }

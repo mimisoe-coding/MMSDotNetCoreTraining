@@ -20,10 +20,11 @@
 //AdoDotExample adoDotExample = new AdoDotExample();
 //adoDotExample.Run();
 
-using MMSHomework.DapperExamples;
+//using MDotNetCore.ConsoleApp.HttpClientExamples;
+//using MMSHomework.DapperExamples;
 
-DapperExample dapperExample = new DapperExample();
-dapperExample.Run();
+//DapperExample dapperExample = new DapperExample();
+//dapperExample.Run();
 
 //using MDotNetCore.ConsoleApp.EFCoreExamples;
 //try
@@ -35,6 +36,36 @@ dapperExample.Run();
 //{
 //    Console.WriteLine(e.ToString());
 //}
+
+using MDotNetCore.ConsoleApp.HttpClientExamples;
+
+//try
+//{
+//Statement:
+//    Console.ReadKey();
+//    HttpClientExample httpClient = new HttpClientExample();
+//    await httpClient.Run();
+//    goto Statement;
+//}
+//catch (Exception e)
+//{
+//    Console.WriteLine(e.Message);
+//}
+
+using MDotNetCore.ConsoleApp.RestClientExamples;
+
+try
+{
+Statement:
+    Console.ReadKey();
+    RestClientExample example = new RestClientExample();
+    await example.Run();
+    goto Statement;
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.ToString());
+}
 
 
 
