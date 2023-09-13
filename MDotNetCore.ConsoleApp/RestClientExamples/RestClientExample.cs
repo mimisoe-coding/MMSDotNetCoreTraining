@@ -52,23 +52,23 @@ namespace MDotNetCore.ConsoleApp.RestClientExamples
             //    });
             //}
 
-            if (!string.IsNullOrWhiteSpace(paintName) &&
-                !string.IsNullOrWhiteSpace(paintType) &&
-                paintPrice > 0)
-                await Post(
-                        new PaintingModel
-                        {
-                            PaintingName = paintName,
-                            PaintingType = paintType,
-                            PaintingPrice = paintPrice
-                        });
+            //if (!string.IsNullOrWhiteSpace(paintName) &&
+            //    !string.IsNullOrWhiteSpace(paintType) &&
+            //    paintPrice > 0)
+            //    await Post(
+            //            new PaintingModel
+            //            {
+            //                PaintingName = paintName,
+            //                PaintingType = paintType,
+            //                PaintingPrice = paintPrice
+            //            });
 
-            //await Patch(paintId, new PaintingModel
-            //{
-            //    PaintingName = paintName,
-            //    PaintingType = paintType,
-            //    PaintingPrice = paintPrice
-            //});
+            await Patch(paintId, new PaintingModel
+            {
+                PaintingName = paintName,
+                PaintingType = paintType,
+                PaintingPrice = paintPrice
+            });
         }
 
         private async Task Read()

@@ -3,6 +3,7 @@ using MDotNetCore.ConsoleApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace MDotNetCore.RestApi.Controllers
 {
@@ -41,7 +42,7 @@ namespace MDotNetCore.RestApi.Controllers
             await _appDbContext.Painting.AddAsync(painting);
             var result=await _appDbContext.SaveChangesAsync();
             string message = result > 0 ? "Painting Insertion Successful" : "Painting Insertion Unsuccessful";
-            return Ok(message);
+            return Ok(new { Message = message, Data = painting });
         }
 
         [HttpPut("{id}")]
@@ -99,7 +100,7 @@ namespace MDotNetCore.RestApi.Controllers
             _appDbContext.Painting.Remove(item);
             var result = await _appDbContext.SaveChangesAsync();
             string message = result > 0 ? "Painting Deleting Successful" : "Painting Deleting Unsuccessful";
-            return Ok(message);
+            return Ok(new { Message = message });
         }
     }
 }

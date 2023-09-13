@@ -49,7 +49,6 @@ namespace MDotNetCore.ConsoleApp.HttpClientExamples
             //        PaintingType = paintType,
             //        PaintingPrice = pantPrice
             //    });
-
             //}
             
             //if(!string.IsNullOrWhiteSpace(paintName) &&
@@ -69,9 +68,6 @@ namespace MDotNetCore.ConsoleApp.HttpClientExamples
             //    PaintingType = paintType,
             //    PaintingPrice = pantPrice
             //});
-
-
-
         }
         private async Task Read()
         {
@@ -125,7 +121,6 @@ namespace MDotNetCore.ConsoleApp.HttpClientExamples
             {
                 Console.WriteLine($"Updating failed with id {id}");
             }
-
         }
 
         private async Task Post(PaintingModel model)

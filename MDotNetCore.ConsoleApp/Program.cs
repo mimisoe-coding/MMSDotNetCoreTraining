@@ -38,6 +38,7 @@
 //}
 
 using MDotNetCore.ConsoleApp.HttpClientExamples;
+using MDotNetCore.ConsoleApp.RefitExamples;
 
 //try
 //{
@@ -58,8 +59,10 @@ try
 {
 Statement:
     Console.ReadKey();
-    RestClientExample example = new RestClientExample();
-    await example.Run();
+    //RestClientExample example = new RestClientExample();
+    //await example.Run();
+    RefitExample refitExample = new RefitExample();
+    await refitExample.Run();
     goto Statement;
 }
 catch (Exception e)
