@@ -3,8 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Data.SqlClient;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://127.0.0.1:5500")
+                                                    .AllowAnyHeader()
+                                                    .AllowAnyMethod();
+                      });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -27,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

@@ -76,6 +76,7 @@ namespace MDotNetCore.ConsoleApp.RefitExamples
             var result = await paintingApi.GetPaintingsById(id);
             Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
         }
+
         public async Task Create(PaintingModel model)
         {
             var paintingApi = RestService.For<IPaintingAPI>("https://localhost:7146");

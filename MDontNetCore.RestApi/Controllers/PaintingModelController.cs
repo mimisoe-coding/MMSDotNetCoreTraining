@@ -52,8 +52,7 @@ namespace MDotNetCore.RestApi.Controllers
             if (item is null)
             {
                 return NotFound(new { Message = $"Painting Not Found with id {id}" });
-            }
-            
+            } 
             item.PaintingName= painting.PaintingName;
             item.PaintingType= painting.PaintingType;
             item.PaintingPrice= painting.PaintingPrice;
