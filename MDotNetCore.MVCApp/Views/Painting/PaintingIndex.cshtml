@@ -1,0 +1,50 @@
+﻿
+@{
+    List<PaintingModel> lst = ViewBag.paintings;
+    int pageCount = ViewBag.pageCount;
+    int pageNo = ViewBag.pageNo;
+    int pageSize = ViewBag.pageSize;
+    int count = (pageNo-1)*pageSize;
+}
+<h1>Painting List</h1>
+<p>@lst.Count</p>
+<p>@pageCount</p>
+
+<table class="table">
+    <thead>
+        <tr class="table-success">
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in lst)
+        {
+            <tr class="table-success">
+                <th scope="row">@(++count)</th>
+                <td>@item.PaintingName</td>
+                <td>@item.PaintingType</td>
+                <td>@item.PaintingPrice</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<nav aria-label="...">
+    <ul class="pagination">
+        @for (int i = 1; i <= pageCount; i++)
+        {
+            if (pageNo == i)
+            {
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">@i</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" href="/Painting/Index?pageNo=@i&pageSize=@pageSize">@i</a></li>
+            }
+        }
+    </ul>
+</nav>

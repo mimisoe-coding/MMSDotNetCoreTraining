@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date Picker Example</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fengyuanchen/datepicker@0.6.5/dist/datepicker.min.css"
+      integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <h1>Date Picker Example</h1>
+    <div class="container">
+      <div>
+        <label for="">Simple Format</label>
+        <input id="simple" />
+        <br />
+        <br />
+      </div>
+      <div>
+        <label for="">Start Date</label>
+        <input id="newdate" />
+        <br />
+        <br />
+      </div>
+      <div>
+        <label for="">Filter Date</label>
+        <input id="filter" />
+        <br />
+        <br />
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@fengyuanchen/datepicker@0.6.5/dist/datepicker.min.js"
+      integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      $("#simple").datepicker({
+        format: "yyyy-mm-dd",
+        autoHide: true,
+        yearSuffix: "Mingalarpar",
+      });
+      $("#newdate").datepicker({
+        date: new Date(2030, 1, 14),
+        autoHide: true,
+      });
+
+      var now = Date.now();
+      $("#filter").datepicker({
+        filter: function (date, view) {
+          if (date.getDay() === 0 && view === "day") {
+            return false; // Disable all Sundays, but still leave months/years, whose first day is a Sunday, enabled.
+          }
+        },
+        yearSuffix: " Today",
+      });
+    </script>
+  </body>
+</html>

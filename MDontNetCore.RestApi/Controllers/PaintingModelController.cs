@@ -18,11 +18,25 @@ namespace MDotNetCore.RestApi.Controllers
             _appDbContext = appDbContext;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetPaintingAsync() 
+        [HttpGet("{pageNo}/{pageSize}")]
+        public async Task<IActionResult> GetPaintingAsync(int pageNo,int pageSize) 
         {
-            var lst = await _appDbContext.Painting.ToListAsync();
-            return Ok(lst);
+            //var lst = await _appDbContext.Painting.ToListAsync();
+            //return Ok(lst);
+
+            //Pagination
+            var query = _appDbContext.Painting.OrderByDescending(x => x.PaintingId);
+            var lst = await query
+                .Skip((pageNo - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var pageCount = 0;
+            var pageRowCount= await query.CountAsync();
+            pageCount = pageRowCount / pageSize;
+            if (pageRowCount % pageSize > 0)
+                pageCount++;
+            return Ok(new { Paintings = lst, PageNo = pageNo, PageCount = pageCount ,PageSize = pageSize});
         }
 
         [HttpGet("{id}")]

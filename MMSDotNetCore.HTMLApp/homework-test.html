@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/notiflix@3.2.6/dist/notiflix-3.2.6.min.css"
+      integrity="sha256-quZ4+TPWUyQzuPnahKf6d8Xal6tZcYZTzSt4wFVEFn8="
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+  </head>
+  <body>
+    <button type="button" onclick="notify()" class="btn btn-success">
+      Notify
+    </button>
+    <button type="button" onclick="report()" class="btn btn-success">
+      Report
+    </button>
+    <button type="button" onclick="confirm()" class="btn btn-success">
+      Confirm
+    </button>
+    <button type="button" onclick="toast()" class="btn btn-success">
+      Toast
+    </button>
+    <button type="button" onclick="offsettoast()" class="btn btn-success">
+      Offset Toast
+    </button>
+    <button type="button" onclick="sweetalert()" class="btn btn-success">
+      SweetAlert
+    </button>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/notiflix@3.2.6/dist/notiflix-aio-3.2.6.min.js"
+      integrity="sha256-pXMqYvjzxYjuQ3+Iz0Zpw3Tk3BAoet8dOsODol/iqTI="
+      crossorigin="anonymous" ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      // $('#notifyButton').click(function() {
+      //     notify();
+      // });
+      function notify() {
+        Notiflix.Notify.success("Sol lucet omnibus");
+        Notiflix.Notify.failure("Qui timide rogat docet negare");
+
+        Notiflix.Notify.success("Click to show an alert.", function cb() {
+          alert("dfasdf");
+        });
+      }
+
+      function report() {
+        Notiflix.Report.success(
+          "Notiflix Success",
+          '"Do not try to become a person of success but try to become a person of value." <br/><br/>- Albert Einstein',
+          "Okay"
+        );
+
+        Notiflix.Report.success(
+          "Notiflix",
+          'Be brave, take the hill, but first answer that question: "What’s my hill?"',
+          "Alert",
+          function cb() {}
+        );
+      }
+      //report();
+      function confirm() {
+        Notiflix.Confirm.show(
+          "Confirm Box",
+          "Do you agree with me?",
+          "Yes",
+          "No",
+          function okCb() {
+            alert("Thank you.");
+          },
+          function cancelCb() {
+            alert("If you say so...");
+          },
+          {}
+        );
+      }
+
+      function toast() {
+        Toastify({
+          text: "This is a toast",
+          duration: 3000,
+          //destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+          },
+          onClick: function () {}, // Callback after click
+        }).showToast();
+      }
+
+      function offsettoast() {
+        Toastify({
+          text: "This is a toast with offset",
+          offset: {
+            x: 300, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+            y: 300, // vertical axis - can be a number or a string indicating unity. eg: '2em'
+          },
+        }).showToast();
+      }
+
+      function sweetalert() {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
+      }
+    </script>
+  </body>
+</html>
