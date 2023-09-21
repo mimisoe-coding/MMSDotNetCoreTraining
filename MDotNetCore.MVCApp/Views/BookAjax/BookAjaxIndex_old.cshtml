@@ -1,0 +1,132 @@
+﻿@{
+    // bool isSuccess = false;
+    // string message = null;
+    // if (TempData["isSuccess"] != null)
+    // {
+    //     isSuccess = Convert.ToBoolean(TempData["isSuccess"].ToString());
+    // }
+    // if (TempData["message"] != null)
+    // {
+    //     message = TempData["message"].ToString();
+    // }
+
+    List<BookModel> lst = ViewBag.books;
+    int pageCount = ViewBag.pageCount;
+    int pageNo = ViewBag.pageNo;
+    int pageSize = ViewBag.pageSize;
+    int count = (pageNo - 1) * pageSize;
+    var data = new PageSettingModel
+            {
+                PageCount = pageCount,
+                PageNo = pageNo,
+                PageSize = pageSize,
+                PageUrl = "/Painting/Index"
+            };
+}
+<h1>Book List</h1>
+@* @if (message is not null)
+{
+    if (isSuccess)
+    {
+        <div class="alert alert-success" role="alert">
+            @message
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @message
+        </div>
+    }
+} *@
+<p>Row Count  : @lst.Count</p>
+<p>Page Count : @pageCount</p>
+
+<a href="/BookAjax/Create" class="btn btn-outline-warning">
+    <i class="fa-solid fa-plus"></i>
+</a>
+<table class="table">
+    <thead>
+        <tr class="table-success">
+            <th></th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in lst)
+        {
+            <tr class="table-success">
+                <td>
+                    <a href="/BookAjax/Edit/@item.Id" class="btn btn-outline-warning">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    @* <a href="/Blog/Delete/@item.BlogId" class="btn btn-outline-danger">
+                <i class="fa-solid fa-trash-can"></i>
+                </a> *@
+                    <button type="button" class="btn btn-outline-danger btn-delete" data-id="@item.Id">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </td>
+                <th scope="row">@(++count)</th>
+                <td>@item.Name</td>
+                <td>@item.Author</td>
+                <td>@item.Category</td>
+                <td>@item.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<partial name="_Pagination" model="data" />
+@section scripts{
+    <script>
+        $('.btn-delete').click(function () {
+            const id = $(this).data('id');
+
+            Swal.fire({
+                title: 'Confirm',
+                text: "Are you sure want to delete?",
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'No',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const url = `/BookAjax/Delete/${id}`;
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        success: function (data) {
+                            if (data.isSuccess) {
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: data.message,
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.href = data.pageUrl;
+                                    }
+                                })
+                            }
+                            else {
+                                Swal.fire(
+                                    'Error',
+                                    data.message,
+                                    'error'
+                                )
+                            }
+                        },
+                        error: function (request, status, error) {
+                            console.log(request.responseText);
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+}
+

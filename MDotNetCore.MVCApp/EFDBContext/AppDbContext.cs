@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MDotNetCore.MVCApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -33,6 +34,8 @@ namespace MDotNetCore.MVCApp
         //    }
         //}
 
-        public DbSet<Models.PaintingModel> Painting { get; set; }
+        public DbSet<PaintingModel> Painting { get; set; }
+
+        public DbSet<BookModel> Book { get; set; }
     }
 }

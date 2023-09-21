@@ -1,0 +1,18 @@
+﻿@model PaintingModel
+
+<form action="/Painting/Update/@Model.PaintingId" method="post">
+    <div class="mb-3">
+        <label class="form-label">Painting Name</label>
+        <input type="text" class="form-control" name="PaintingName" value="@Model.PaintingName" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Painting Type</label>
+        <input type="text" class="form-control" name="PaintingType" value="@Model.PaintingType" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Painting Price</label>
+        <input type="text" class="form-control" name="PaintingPrice" value="@Model.PaintingPrice" placeholder="name@example.com">
+    </div>
+    <a href="/Blog" class="btn btn-outline-dark">Back</a>
+    <button type="submit" class="btn btn-success">Update</button>
+</form>

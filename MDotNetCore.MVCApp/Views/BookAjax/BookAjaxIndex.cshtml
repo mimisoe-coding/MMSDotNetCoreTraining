@@ -1,0 +1,121 @@
+﻿<a href="/BookAjax/Create" class="btn btn-outline-warning">
+    <i class="fa-solid fa-plus"></i>
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody id="tbDataTableBody">
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        let _pageNo = @ViewBag.pageNo;
+        let _pageSize = @ViewBag.pageSize;
+
+        $(document).ready(function () {
+            loadData(_pageNo, _pageSize);
+        });
+        function loadData(pageNo, pageSize) {
+            const url = `/BookAjax/Index?pageNo=${pageNo}&pageSize=${pageSize}`;
+            $.ajax({
+                url: url,
+                type: 'POST',
+                success: function (data) {
+                    if (data.isSuccess) {
+                        let rows = '';
+                        let skipRows = (pageNo - 1) * pageSize;
+                        $.each(data.data, function (index, item) {
+                            let row = `
+                                <tr>
+                                  <td>
+                                    <a href="/BookAjax/Edit/${item.id}" class="btn btn-outline-warning">
+                                      <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger btn-delete" data-id="${item.id}">
+                                      <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                  </td>
+                                  <th scope="row">${skipRows + (index + 1)}</th>
+                                  <td>
+                                    <a href="/BookAjax/Edit/${item.id}">${item.name}</a>
+                                  </td>
+                                  <td>${item.author}</td>
+                                  <td>${item.category}</td>
+                                  <td>${item.price}</td>
+                                </tr>
+                                `; rows += row;
+                        });
+                        $('#tbDataTableBody').html(rows);
+
+                    }
+                    else {
+                        Swal.fire(
+                            'Error',
+                            data.message,
+                            'error'
+                        );
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(request.responseText);
+                }
+            });
+        }
+
+        $(document).on('click', '.btn-delete', function () {
+            $('.btn-delete').click(function () {
+                const id = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Confirm',
+                    text: "Do you want to delete?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: 'No',
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const url = `/BookAjax/Delete/${id}`;
+                        $.ajax({
+                            url: url,
+                            type: 'POST',
+                            success: function (data) {
+                                if (data.isSuccess) {
+                                    Swal.fire({
+                                        title: 'Success',
+                                        text: data.message,
+                                        icon: 'success',
+                                        showCancelButton: false,
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.href = data.pageUrl;
+                                        }
+                                    })
+                                }
+                                else {
+                                    Swal.fire(
+                                        'Error',
+                                        data.message,
+                                        'error'
+                                    )
+                                }
+                            },
+                            error: function (request, status, error) {
+                                console.log(request.responseText);
+                            }
+                        });
+                    }
+                })
+            })
+        });
+    </script>
+}

@@ -45,6 +45,7 @@
 <table class="table">
     <thead>
         <tr class="table-success">
+            <th></th>
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Type</th>
@@ -55,6 +56,17 @@
         @foreach (var item in lst)
         {
             <tr class="table-success">
+                <td>
+                    <a href="/Painting/Edit/@item.PaintingId" class="btn btn-outline-warning">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    @* <a href="/Blog/Delete/@item.BlogId" class="btn btn-outline-danger">
+                <i class="fa-solid fa-trash-can"></i>
+                </a> *@
+                    <button type="button" class="btn btn-outline-danger btn-delete" data-id="@item.PaintingId">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </td>
                 <th scope="row">@(++count)</th>
                 <td>@item.PaintingName</td>
                 <td>@item.PaintingType</td>
@@ -64,6 +76,55 @@
     </tbody>
 </table>
 <partial name="_Pagination" model="data" />
+@section scripts{
+    <script>
+        $('.btn-delete').click(function () {
+            const id = $(this).data('id');
+
+            Swal.fire({
+                title: 'Confirm',
+                text: "Are you sure want to delete?",
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'No',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const url = `/Painting/Delete/${id}`;
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        success: function (data) {
+                            if (data.isSuccess) {
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: data.message,
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.href = data.pageUrl;
+                                    }
+                                })
+                            }
+                            else {
+                                Swal.fire(
+                                    'Error',
+                                    data.message,
+                                    'error'
+                                )
+                            }
+                        },
+                        error: function (request, status, error) {
+                            console.log(request.responseText);
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+}
+
 @* <nav aria-label="...">
     <ul class="pagination">
         @if (pageNo == 1)
@@ -74,7 +135,7 @@
         }
         else
         {
-            <li class="page-item"><a class="page-link" href="/Painting/Index?pageNo=@(pageNo - 1)&pageSize=@pageSize">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="@url?pageNo=@(pageNo - 1)&pageSize=@pageSize">Previous</a></li>
         }
         @if (pageCount < 9)
         {
@@ -88,7 +149,7 @@
                 }
                 else
                 {
-                    <li class="page-item"><a class="page-link" href="/Painting/Index?pageNo=@i&pageSize=@pageSize">@i</a></li>
+                    <li class="page-item"><a class="page-link" href="@url?pageNo=@i&pageSize=@pageSize">@i</a></li>
                 }
             }
         }
@@ -106,7 +167,7 @@
                     }
                     else
                     {
-                        <li class="page-item"><a class="page-link" href="/Painting/Index?pageNo=@i&pageSize=@pageSize">@i</a></li>
+                        <li class="page-item"><a class="page-link" href="@url?pageNo=@i&pageSize=@pageSize">@i</a></li>
                     }
                 }
                 <li class="page-item" aria-current="page">
@@ -122,13 +183,13 @@
                     }
                     else
                     {
-                        <li class="page-item"><a class="page-link" href="/Painting/Index?pageNo=@i&pageSize=@pageSize">@i</a></li>
+                        <li class="page-item"><a class="page-link" href="@url?pageNo=@i&pageSize=@pageSize">@i</a></li>
                     }
                 }
             }
             else
             {
-                <li class="page-item"><a class="page-link" href="/Painting/Index?pageNo=1&pageSize=@pageSize">1</a></li>
+                <li class="page-item"><a class="page-link" href="@url?pageNo=1&pageSize=@pageSize">1</a></li>
                 <li class="page-item" aria-current="page">
                     <a class="page-link" href="#">...</a>
                 </li>
@@ -142,13 +203,13 @@
                     }
                     else
                     {
-                        <li class="page-item"><a class="page-link" href="/Painting/Index?pageNo=@i&pageSize=@pageSize">@i</a></li>
+                        <li class="page-item"><a class="page-link" href="@url?pageNo=@i&pageSize=@pageSize">@i</a></li>
                     }
                 }
                 <li class="page-item" aria-current="page">
                     <a class="page-link" href="#">...</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="/Painting/Index?pageNo=@pageCount&pageSize=@pageSize">@pageCount</a></li>
+                <li class="page-item"><a class="page-link" href="@url?pageNo=@pageCount&pageSize=@pageSize">@pageCount</a></li>
             }
         }
         @if (pageNo == pageCount)
@@ -159,7 +220,7 @@
         }
         else
         {
-            <li class="page-item"><a class="page-link" href="/Painting/Index?pageNo=@(pageNo + 1)&pageSize=@pageSize">Next</a></li>
+            <li class="page-item"><a class="page-link" href="@url?pageNo=@(pageNo + 1)&pageSize=@pageSize">Next</a></li>
         }
     </ul>
 </nav> *@

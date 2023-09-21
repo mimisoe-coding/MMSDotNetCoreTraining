@@ -1,0 +1,54 @@
+﻿<form id="bookForm" method="post">
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" name="Name" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Author</label>
+        <input type="text" class="form-control" name="Author" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <input type="text" class="form-control" name="Category" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control" name="Price" placeholder="name@example.com">
+    </div>
+    <a href="/BookAjax" class="btn btn-outline-dark">Back</a>
+    <button type="button" class="btn btn-save btn-success" id="saveButton">Save</button>
+</form>
+@section scripts{
+    <script>
+        $('#saveButton').click(function () {
+            console.log("success");
+            var bookData = $('#bookForm').serialize();
+            console.log("bookData"+bookData);
+            const url = `/BookAjax/Save`;
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: bookData,
+                success: function (data) {
+                    if (data.isSuccess) {
+                        Swal.fire({
+                            title: 'Success',
+                            text: data.message,
+                            icon: 'success',
+                            showCancelButton: false,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.href = data.pageUrl;
+                            }
+                        });
+                    } else {
+                        Swal.fire('Error', data.message, 'error');
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(request.responseText);
+                },
+            });
+        });
+</script>
+}
