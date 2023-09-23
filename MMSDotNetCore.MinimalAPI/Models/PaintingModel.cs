@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDotNetCore.RestApi.Models
+namespace MMSDotNetCore.MinimalAPI.Models
 {
     [Table("Tbl_Painting")]
     public class PaintingModel
@@ -23,5 +23,6 @@ namespace MDotNetCore.RestApi.Models
 
         [Column("PaintingPrice")]
         public decimal PaintingPrice { get; set; }
+
     }
 }

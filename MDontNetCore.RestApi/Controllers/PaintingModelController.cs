@@ -1,11 +1,12 @@
-﻿using MDotNetCore.ConsoleApp.EFCoreExamples;
-using MDotNetCore.ConsoleApp.Models;
+﻿
+using MDotNetCore.RestApi.EFDBContext;
+using MDotNetCore.RestApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
-namespace MDotNetCore.RestApi.Controllers
+namespace MDotNetCore.RestApi.EFDBContext
 {
     [Route("api/[controller]")]
     [ApiController]

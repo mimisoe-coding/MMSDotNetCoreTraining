@@ -1,10 +1,11 @@
-﻿using MDotNetCore.ConsoleApp.Models;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using Dapper;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Reflection.Metadata;
+using MDotNetCore.RestApi.Models;
 
 namespace MDotNetCore.RestApi.Controllers;
 

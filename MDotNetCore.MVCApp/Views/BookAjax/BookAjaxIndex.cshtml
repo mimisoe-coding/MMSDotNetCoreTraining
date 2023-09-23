@@ -1,4 +1,13 @@
-﻿<a href="/BookAjax/Create" class="btn btn-outline-warning">
+﻿@using System.Text.Json;
+@model BookListResponseModel
+@{
+    var data = JsonSerializer.Serialize(Model, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+}
+<h1>Book Ajax List</h1>
+<a href="/BookAjax/Create" class="btn btn-outline-warning">
     <i class="fa-solid fa-plus"></i>
 </a>
 <table class="table">
@@ -16,13 +25,18 @@
     </tbody>
 </table>
 
+<div id="pagination">
+</div>
+
 @section scripts{
     <script>
-        let _pageNo = @ViewBag.pageNo;
-        let _pageSize = @ViewBag.pageSize;
+        let _pageNo = @Model.PageNo;
+        let _pageSize = @Model.PageSize;
 
         $(document).ready(function () {
-            loadData(_pageNo, _pageSize);
+            var data = @(Html.Raw(data));
+            loadTable(_pageNo, _pageSize, data);
+            //loadData(_pageNo, _pageSize);
         });
         function loadData(pageNo, pageSize) {
             const url = `/BookAjax/Index?pageNo=${pageNo}&pageSize=${pageSize}`;
@@ -31,31 +45,15 @@
                 type: 'POST',
                 success: function (data) {
                     if (data.isSuccess) {
-                        let rows = '';
-                        let skipRows = (pageNo - 1) * pageSize;
-                        $.each(data.data, function (index, item) {
-                            let row = `
-                                <tr>
-                                  <td>
-                                    <a href="/BookAjax/Edit/${item.id}" class="btn btn-outline-warning">
-                                      <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <button type="button" class="btn btn-outline-danger btn-delete" data-id="${item.id}">
-                                      <i class="fa-solid fa-trash-can"></i>
-                                    </button>
-                                  </td>
-                                  <th scope="row">${skipRows + (index + 1)}</th>
-                                  <td>
-                                    <a href="/BookAjax/Edit/${item.id}">${item.name}</a>
-                                  </td>
-                                  <td>${item.author}</td>
-                                  <td>${item.category}</td>
-                                  <td>${item.price}</td>
-                                </tr>
-                                `; rows += row;
-                        });
-                        $('#tbDataTableBody').html(rows);
+                        loadTable(pageNo, pageSize, data);
 
+                        var pageSettingModel = {
+                            pageNo: data.pageNo,
+                            pageSize: data.pageSize,
+                            pageCount: data.pageCount,
+                            pageUrl: data.pageUrl
+                        }
+                        loadPagination(pageSettingModel);
                     }
                     else {
                         Swal.fire(
@@ -70,7 +68,60 @@
                 }
             });
         }
-
+        function loadTable(pageNo, pageSize, data) {
+            let rows = '';
+            let skipRows = (pageNo - 1) * pageSize;
+            $.each(data.data, function (index, item) {
+                let row = `
+                                                <tr>
+                                                    <td>
+                                                    <a href="/BookAjax/Edit/${item.id}" class="btn btn-outline-warning">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <button type="button" class="btn btn-outline-danger btn-delete" data-id="${item.id}">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                    </td>
+                                                    <th scope="row">${skipRows + (index + 1)}</th>
+                                                    <td>
+                                                    <a href="/BookAjax/Edit/${item.id}">${item.name}</a>
+                                                    </td>
+                                                    <td>${item.author}</td>
+                                                    <td>${item.category}</td>
+                                                    <td>${item.price}</td>
+                                                </tr>
+                                                `; rows += row;
+            });
+            $('#tbDataTableBody').html(rows);
+            var pageSettingModel = {
+                pageNo: data.pageNo,
+                pageSize: data.pageSize,
+                pageCount: data.pageCount,
+                pageUrl: data.pageUrl
+            }
+            loadPagination(pageSettingModel);
+        }
+        function loadPagination(data) {
+            const url = `/BookAjax/Pagination?pageNo=${data.pageNo}&pageSize=${data.pageSize}&pageCount=${data.pageCount}&pageUrl=${data.pageURl}`;
+            $.ajax({
+                url: url,
+                dataType: 'HTML',
+                success: function (response) {
+                    $("#pagination").html(response);
+                    loadClickEventPagination();
+                },
+                error: function (request, status, error) {
+                    console.log(request.responseText);
+                }
+            });
+        }
+        function loadClickEventPagination() {
+            $('[data-id="custom-pagination"]').click(function () {
+                const pageNo = $(this).data('page-no');
+                const pageSize = $(this).data('page-size');
+                loadData(pageNo, pageSize);
+            })
+        }
         $(document).on('click', '.btn-delete', function () {
             $('.btn-delete').click(function () {
                 const id = $(this).data('id');

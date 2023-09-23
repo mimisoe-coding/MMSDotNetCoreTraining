@@ -1,4 +1,4 @@
-using MDotNetCore.ConsoleApp.EFCoreExamples;
+using MDotNetCore.RestApi.EFDBContext;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Data.SqlClient;

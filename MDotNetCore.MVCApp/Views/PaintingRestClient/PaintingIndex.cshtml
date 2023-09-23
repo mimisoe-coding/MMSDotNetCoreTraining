@@ -1,0 +1,230 @@
+﻿@model List<PaintingModel>
+@{
+    bool isSuccess = false;
+    string message = null;
+    if (TempData["isSuccess"] != null)
+    {
+        isSuccess = Convert.ToBoolean(TempData["isSuccess"].ToString());
+    }
+    if (TempData["message"] != null)
+    {
+        message = TempData["message"].ToString();
+    }
+
+    List<PaintingModel> lst = ViewBag.Paintings;
+    int pageCount = ViewBag.pageCount;
+    int pageNo = ViewBag.pageNo;
+    int pageSize = ViewBag.pageSize;
+    int count = (pageNo - 1) * pageSize;
+    // var data = new PageSettingModel
+    //         {
+    //             PageCount = pageCount,
+    //             PageNo = pageNo,
+    //             PageSize = pageSize,
+    //             PageUrl = "/Painting/Index"
+    //         };
+}
+<h1>Painting Rest Client</h1>
+@if (message is not null)
+{
+    if (isSuccess)
+    {
+        <div class="alert alert-success" role="alert">
+            @message
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @message
+        </div>
+    }
+}
+<p>Row Count  : @lst.Count</p>
+<p>Page Count : @pageCount</p>
+<a href="/PaintingRestClient/Create" class="btn btn-outline-warning">
+    <i class="fa-solid fa-plus"></i>
+</a>
+<table class="table">
+    <thead>
+        <tr class="table-success">
+            <th></th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in lst)
+        {
+            <tr class="table-success">
+                <td>
+                    <a href="/PaintingRestClient/Edit/@item.PaintingId" class="btn btn-outline-warning">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    @* <a href="/PaintingRestClient/Delete/@item.BlogId" class="btn btn-outline-danger">
+                <i class="fa-solid fa-trash-can"></i>
+                </a> *@
+                    <button type="button" class="btn btn-outline-danger btn-delete" data-id="@item.PaintingId">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </td>
+                <th scope="row">@(++count)</th>
+                <td>@item.PaintingName</td>
+                <td>@item.PaintingType</td>
+                <td>@item.PaintingPrice</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="...">
+    <ul class="pagination">
+        @if (pageNo == 1)
+        {
+            <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item"><a class="page-link" href="/paintingrestclient/index?pageNo=@(pageNo - 1)&pageSize=@pageSize">Previous</a></li>
+        }
+        @if (pageCount < 9)
+        {
+            @for (int i = 1; i <= pageCount; i++)
+            {
+                if (pageNo == i)
+                {
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">@i</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="/paintingrestclient/index?pageNo=@i&pageSize=@pageSize">@i</a></li>
+                }
+            }
+        }
+        else
+        {
+            if (pageNo <= 3 || pageNo >= pageCount - 2)
+            {
+                for (int i = 1; i <= 4; i++)
+                {
+                    if (pageNo == i)
+                    {
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="/paintingrestclient/index?pageNo=@i&pageSize=@pageSize">@i</a></li>
+                    }
+                }
+                <li class="page-item" aria-current="page">
+                    <a class="page-link" href="#">...</a>
+                </li>
+                for (int i = pageCount - 3; i <= pageCount; i++)
+                {
+                    if (pageNo == i)
+                    {
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="/paintingrestclient/index?pageNo=@i&pageSize=@pageSize">@i</a></li>
+                    }
+                }
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" href="/paintingrestclient/index?pageNo=1&pageSize=@pageSize">1</a></li>
+                <li class="page-item" aria-current="page">
+                    <a class="page-link" href="#">...</a>
+                </li>
+                @for (int i = pageNo - 2; i <= pageNo + 2; i++)
+                {
+                    if (pageNo == i)
+                    {
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="/paintingrestclient/index?pageNo=@i&pageSize=@pageSize">@i</a></li>
+                    }
+                }
+                <li class="page-item" aria-current="page">
+                    <a class="page-link" href="#">...</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="/paintingrestclient/index?pageNo=@pageCount&pageSize=@pageSize">@pageCount</a></li>
+            }
+        }
+        @if (pageNo == pageCount)
+        {
+            <li class="page-item disabled">
+                <a class="page-link">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item"><a class="page-link" href="/paintingrestclient/index?pageNo=@(pageNo + 1)&pageSize=@pageSize">Next</a></li>
+        }
+    </ul>
+</nav>
+
+@section scripts{
+    <script>
+        $('.btn-delete').click(function () {
+            const id = $(this).data('id');
+
+            Swal.fire({
+                title: 'Confirm',
+                text: "Are you sure want to delete?",
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'No',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const url = `/PaintingRestClient/Delete/${id}`;
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        success: function (data) {
+                            if (data.isSuccess) {
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: data.message,
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.href = `/PaintingRestClient`;
+                                    }
+                                })
+                            }
+                            else {
+                                Swal.fire(
+                                    'Error',
+                                    data.message,
+                                    'error'
+                                )
+                            }
+                        },
+                        error: function (request, status, error) {
+                            console.log(request.responseText);
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+}
+

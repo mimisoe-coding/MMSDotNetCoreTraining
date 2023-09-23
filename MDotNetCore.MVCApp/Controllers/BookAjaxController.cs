@@ -32,21 +32,31 @@ namespace MDotNetCore.MVCApp.Controllers
         }
 
         [ActionName("Index")]
-        public IActionResult BookAjaxIndex()
+        public async Task<IActionResult> BookAjaxIndex()
         {
-            ViewBag.pageNo = 1;
-            ViewBag.pageSize = 10;
-            return View("BookAjaxIndex");
+            var pageNo = 1;
+            var pageSize = 10;
+            //ViewBag.pageNo = 1;
+            // ViewBag.pageSize = 10;
+            var model = await GetBooksAsync(pageNo, pageSize);
+            return View("BookAjaxIndex", model);
         }
 
         [HttpPost]
         [ActionName("Index")]
-        public async Task<IActionResult> BookAjaxIndex(int pageNo = 1, int pageSize = 5)
+        public async Task<IActionResult> BookAjaxIndex(int pageNo = 1, int pageSize = 10)
         {
-            BookListResponseModel model = null;
+            var model = await GetBooksAsync(pageNo, pageSize);
+            return Json(model);
+        }
+
+        private async Task<BookListResponseModel> GetBooksAsync(int pageNo = 1, int pageSize = 10)
+        {
+            BookListResponseModel? model = null;
             try
             {
-                var query = _context.Book.OrderByDescending(x => x.Id);
+                var query = _context.Book
+                .OrderByDescending(x => x.Id);
                 var lst = await query
                     .Skip((pageNo - 1) * pageSize)
                     .Take(pageSize)
@@ -57,6 +67,7 @@ namespace MDotNetCore.MVCApp.Controllers
                 pageCount = pageRowCount / pageSize;
                 if (pageRowCount % pageSize > 0)
                     pageCount++;
+
                 model = new BookListResponseModel()
                 {
                     IsSuccess = true,
@@ -64,18 +75,19 @@ namespace MDotNetCore.MVCApp.Controllers
                     Data = lst,
                     PageNo = pageNo,
                     PageSize = pageSize,
-                    PageCount = pageCount
+                    PageCount = pageCount,
+                    PageUrl = "/BookAjax/Index"
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 model = new BookListResponseModel
-                {   IsSuccess = false,
-                    Message = ex.Message 
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
                 };
             }
-
-            return Json(model);
+            return model;
         }
 
         [HttpGet]
@@ -165,6 +177,20 @@ namespace MDotNetCore.MVCApp.Controllers
             model = new MessageResponseModel(result > 0, message, "/BookAjax");
         result:
             return Json(model);
+        }
+
+        [HttpGet]
+        [ActionName("Pagination")]
+        public async Task<IActionResult> BookAjaxPagination(int pageNo, int pageSize, int pageCount, string pageUrl)
+        {
+            PageSettingModel model = new PageSettingModel
+            {
+                PageNo = pageNo,
+                PageSize = pageSize,
+                PageCount = pageCount,
+                PageUrl = pageUrl
+            };
+            return PartialView("_PaginationAjax", model);
         }
     }
 }

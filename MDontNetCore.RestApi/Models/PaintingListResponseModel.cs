@@ -1,11 +1,11 @@
-﻿namespace MDotNetCore.MVCApp.Models
+﻿namespace MDotNetCore.RestApi.Models
 {
-    public class BookListResponseModel:MessageModel
+    public class PaintingListResponseModel:MessageModel
     {
         public int PageNo { get; set; }
         public int PageSize { get; set; }
         public int PageCount { get; set; }
         public string? PageUrl { get; set; }
-        public List<BookModel>? Data { get; set; }
+        public List<PaintingModel>? Data { get; set; }
     }
 }

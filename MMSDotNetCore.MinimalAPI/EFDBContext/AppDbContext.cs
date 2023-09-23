@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MDotNetCore.RestApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MMSDotNetCore.MinimalAPI.Models;
 
-
-namespace MDotNetCore.RestApi.EFDBContext
+namespace MMSDotNetCor.MinimalAPI
 {
     public class AppDbContext:DbContext
     {
