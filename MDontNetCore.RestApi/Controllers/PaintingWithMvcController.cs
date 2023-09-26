@@ -10,7 +10,6 @@ namespace MDotNetCore.RestApi.Controllers
     public class PaintingWithMvcController : Controller
     {
         private readonly AppDbContext _context;
-
         public PaintingWithMvcController(AppDbContext context)
         {
             _context = context;

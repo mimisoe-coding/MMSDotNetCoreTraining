@@ -4,7 +4,10 @@ using MDotNetCore.RestApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Reflection.Metadata;
+using System.Text.Json.Serialization;
 
 namespace MDotNetCore.RestApi.EFDBContext
 {
@@ -13,10 +16,11 @@ namespace MDotNetCore.RestApi.EFDBContext
     public class PaintingModelController : ControllerBase
     {
         private readonly AppDbContext _appDbContext;
-
-        public PaintingModelController(AppDbContext appDbContext)
+        private readonly ILogger<PaintingModelController> _logger;
+        public PaintingModelController(AppDbContext appDbContext, ILogger<PaintingModelController> logger)
         {
             _appDbContext = appDbContext;
+            _logger = logger;
         }
 
         [HttpGet("{pageNo}/{pageSize}")]
@@ -37,6 +41,8 @@ namespace MDotNetCore.RestApi.EFDBContext
             pageCount = pageRowCount / pageSize;
             if (pageRowCount % pageSize > 0)
                 pageCount++;
+
+            _logger.LogInformation(JsonConvert.SerializeObject(lst));
             return Ok(new { Paintings = lst, PageNo = pageNo, PageCount = pageCount ,PageSize = pageSize});
         }
 
@@ -48,7 +54,10 @@ namespace MDotNetCore.RestApi.EFDBContext
             {
                 return NotFound(new {Message = $"Painting Not Found with id {id}"});
             }
+            _logger.LogInformation("************************Edit Painting**********************************");
+            _logger.LogInformation(JsonConvert.SerializeObject(item));
             return Ok(item);
+
         }
 
         [HttpPost]

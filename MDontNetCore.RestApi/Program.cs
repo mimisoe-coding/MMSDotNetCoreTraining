@@ -1,10 +1,22 @@
 using MDotNetCore.RestApi.EFDBContext;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Data;
 using System.Data.SqlClient;
 
+Console.WriteLine("************************************************Painting Info ********************************************");
+string filePath = Path.Combine("D:\\ace\\serilog", "paintingInfo.txt");
+Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                //.WriteTo.Console()
+                //.WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Hour)
+                .WriteTo.File(filePath, rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -25,12 +37,13 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("MSDBConnection"));
 });
-
+builder.Host.UseSerilog();
 builder.Services.AddScoped<IDbConnection, SqlConnection>(n => new SqlConnection(builder.Configuration.GetConnectionString("MSDBConnection")));
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.;
-if (app.Environment.IsDevelopment())
+
+    // Configure the HTTP request pipeline.;
+    if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -45,3 +58,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

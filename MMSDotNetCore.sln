@@ -16,7 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATM", "ATM\ATM.csproj", "{6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.MVCApp", "MDotNetCore.MVCApp\MDotNetCore.MVCApp.csproj", "{24DACD6A-17A5-43C6-928D-84DD10960FE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMSDotNetCore.MinimalAPI", "MMSDotNetCore.MinimalAPI\MMSDotNetCore.MinimalAPI.csproj", "{2A1A7616-B072-4929-951F-CEA31C020B48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMSDotNetCore.MinimalAPI", "MMSDotNetCore.MinimalAPI\MMSDotNetCore.MinimalAPI.csproj", "{2A1A7616-B072-4929-951F-CEA31C020B48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.SerilogWebApi", "MDotNetCore.SerilogWebApi\MDotNetCore.SerilogWebApi.csproj", "{D838A496-F62D-4806-A0ED-E86C3CCF2C4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{2A1A7616-B072-4929-951F-CEA31C020B48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A1A7616-B072-4929-951F-CEA31C020B48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A1A7616-B072-4929-951F-CEA31C020B48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D838A496-F62D-4806-A0ED-E86C3CCF2C4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D838A496-F62D-4806-A0ED-E86C3CCF2C4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D838A496-F62D-4806-A0ED-E86C3CCF2C4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D838A496-F62D-4806-A0ED-E86C3CCF2C4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

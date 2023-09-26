@@ -12,7 +12,6 @@
 //SqlConnection sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
 //sqlConnection.Open();
 //sqlConnection.Close();
-
 //Console.ReadLine();
 
 //using MDotNetCore.ConsoleApp.AdoDotNetExamples;
@@ -54,21 +53,46 @@ using MDotNetCore.ConsoleApp.RefitExamples;
 //}
 
 using MDotNetCore.ConsoleApp.RestClientExamples;
+using Serilog;
 
+//try
+//{
+//Statement:
+//    Console.ReadKey();
+//    //RestClientExample example = new RestClientExample();
+//    //await example.Run();
+//    RefitExample refitExample = new RefitExample();
+//    await refitExample.Run();
+//    goto Statement;
+//}
+//catch (Exception e)
+//{
+//    Console.WriteLine(e.ToString());
+//}
+Console.WriteLine("Hello, World!");
+
+string filePath = Path.Combine("D:\\ace\\serilog", "myapp.txt");
+Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                //.WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Hour)
+                .WriteTo.File(filePath, rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+Log.Information("Hello, world!");
+
+int a = 10, b = 0;
 try
 {
-Statement:
-    Console.ReadKey();
-    //RestClientExample example = new RestClientExample();
-    //await example.Run();
-    RefitExample refitExample = new RefitExample();
-    await refitExample.Run();
-    goto Statement;
+    Log.Debug("Dividing {A} by {B}", a, b);
+    Console.WriteLine(a / b);
 }
-catch (Exception e)
+catch (Exception ex)
 {
-    Console.WriteLine(e.ToString());
+    Log.Error(ex, "Something went wrong");
 }
-
-
+finally
+{
+    Log.CloseAndFlush();
+}
 
