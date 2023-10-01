@@ -1,0 +1,36 @@
+﻿@{
+    ApexChartResponseModel candle = ViewBag.dataPoint;
+}
+<div id="chart"></div>
+@section scripts{
+    <script>
+        let _data = @Html.Raw(JsonConvert.SerializeObject(candle));
+        var options = {
+            series: [{
+                data: _data
+            }],
+            chart: {
+                type: 'candlestick',
+                height: 350
+            },
+            title: {
+                text: 'CandleStick Chart',
+                align: 'left'
+            },
+            xaxis: {
+                type: 'datetime'
+            },
+            yaxis: {
+                tooltip: {
+                    enabled: true
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+    </script>
+
+}

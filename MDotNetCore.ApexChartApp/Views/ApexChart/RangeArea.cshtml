@@ -1,0 +1,44 @@
+﻿@{
+    RangeAreaAndBoxPlotResponseModel model = ViewBag.rangeArea;
+}
+<div id="chart"></div>
+@section scripts{
+    <script>
+        let _series = @Html.Raw(JsonConvert.SerializeObject(model.Series));
+        var options = {
+            series: _series,
+            chart: {
+                height: 350,
+                type: 'rangeArea'
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            title: {
+                text: 'New York Temperature (all year round)'
+            },
+            markers: {
+                hover: {
+                    sizeOffset: 5
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            yaxis: {
+                labels: {
+                    formatter: (val) => {
+                        return val + '°C'
+                    }
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+    </script>
+
+}
+

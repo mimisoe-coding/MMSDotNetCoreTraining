@@ -1,0 +1,38 @@
+﻿@{
+    ApexChartResponseModel barChart = ViewBag.barChart;
+}
+
+<div id="chart"></div>
+@section scripts{
+    <script>
+        let _series = @Html.Raw(JsonConvert.SerializeObject(barChart.Data));
+        console.log("series  " + _series);
+        let _categories = @Html.Raw(JsonConvert.SerializeObject(barChart.Categories));
+        var options = {
+            series:_series,
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    borderRadiusApplication: 'end',
+                    horizontal: true,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                categories: _categories,
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+    </script>
+
+}

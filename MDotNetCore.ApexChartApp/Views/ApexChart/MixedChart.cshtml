@@ -1,0 +1,45 @@
+﻿@{
+    ApexChartResponseModel mixedChart = ViewBag.mixedChart;
+}
+<div id="chart"></div>
+@section scripts{
+    <script>
+        // let _series = @Html.Raw(JsonConvert.SerializeObject(mixedChart));
+        console.log("series  " + _series);
+        let _labels = @Html.Raw(JsonConvert.SerializeObject(mixedChart.Labels));
+        var options = {
+            series: _series,
+            chart: {
+                height: 350,
+                type: 'line',
+            },
+            stroke: {
+                width: [0, 4]
+            },
+            title: {
+                text: 'Traffic Sources'
+            },
+            dataLabels: {
+                enabled: true,
+                enabledOnSeries: [1]
+            },
+            labels: _labels,
+            xaxis: {
+                type: 'datetime'
+            },
+            yaxis: [{
+                title: {
+                    text: 'Website Blog',
+                },
+
+            }, {
+                opposite: true,
+                title: {
+                    text: 'Social Media'
+                }
+            }]
+        };
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+}

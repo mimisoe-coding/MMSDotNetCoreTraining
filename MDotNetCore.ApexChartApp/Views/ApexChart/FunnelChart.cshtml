@@ -1,0 +1,50 @@
+﻿@{
+    ApexChartResponseModel funnelChart = ViewBag.funnelChart;
+}
+<div id="chart"></div>
+@section scripts{
+    <script>
+        let _series = @Html.Raw(JsonConvert.SerializeObject(funnelChart.Series));
+        console.log("series  " + _series);
+        let _categories = @Html.Raw(JsonConvert.SerializeObject(funnelChart.Categories));
+        var options = {
+            series:_series,
+            chart: {
+                type: 'bar',
+                height: 350,
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 0,
+                    horizontal: true,
+                    barHeight: '80%',
+                    isFunnel: true,
+                },
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function (val, opt) {
+                    return opt.w.globals.labels[opt.dataPointIndex] + ':  ' + val
+                },
+                dropShadow: {
+                    enabled: true,
+                },
+            },
+            title: {
+                text: 'Recruitment Funnel',
+                align: 'middle',
+            },
+            xaxis: {
+                categories: _categories,
+            },
+            legend: {
+                show: false,
+            },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+    </script>
+}

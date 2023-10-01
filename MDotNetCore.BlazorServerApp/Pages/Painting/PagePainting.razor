@@ -1,0 +1,67 @@
+﻿@page "/painting"
+
+@inject HttpClient _httpClient
+
+<h3>PagePainting</h3>
+@if (_pageType == EnumPageType.List)
+{
+    @if (model is not null)
+    {
+        int count = (_pageNo - 1) * _pageSize;
+        <button type="button" class="btn btn-success" @onclick=Create>Create</button>
+        <table class="table">
+            <thead>
+                <tr class="table-success">
+                    <th></th>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in model.Data)
+                {
+                    <tr class="table-success">
+                        <td>
+                            <button class="btn btn-warning" type="button" @onclick="() => Edit(item.PaintingId)">Edit</button>
+                            <button class="btn btn-warning" type="button" @onclick="() => Delete(item.PaintingId)">Delete</button>
+                        </td>
+                        <th scope="row">@(++count)</th>
+                        <td>@item.PaintingName</td>
+                        <td>@item.PaintingType</td>
+                        <td>@item.PaintingPrice</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <MudPagination SelectedChanged="PageChanged" Color="Color.Primary" Count="@model.PageCount" Class="pa-4" />
+    }
+}
+
+else if (_pageType == EnumPageType.Create || _pageType == EnumPageType.Edit)
+{
+    <div class="mb-3">
+        <label class="form-label">Painting Name</label>
+        <input type="text" class="form-control" @bind-value=@reqModel.PaintingName name="PaintingName" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Painting Type</label>
+        <input type="text" class="form-control" @bind-value=@reqModel.PaintingType name="PaintingType" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Painting Price</label>
+        <input type="text" class="form-control" @bind-value=@reqModel.PaintingPrice name="PaintingPrice" placeholder="name@example.com">
+    </div>
+    <button type="button" @onclick=Back class="btn btn-outline-dark">Back</button>
+    @if (_pageType == EnumPageType.Create)
+    {
+        <button type="button" @onclick=Save class="btn btn-success">Save</button>
+    }
+
+    else if (_pageType == EnumPageType.Edit)
+    {
+        <button type="button" @onclick=Update class="btn btn-success">Update</button>
+    }
+
+}

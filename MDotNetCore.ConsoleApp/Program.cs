@@ -54,6 +54,7 @@ using MDotNetCore.ConsoleApp.RefitExamples;
 
 using MDotNetCore.ConsoleApp.RestClientExamples;
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
 
 //try
 //{
@@ -76,7 +77,13 @@ Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
                 //.WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Hour)
-                .WriteTo.File(filePath, rollingInterval: RollingInterval.Day)
+                //.WriteTo.File(filePath, rollingInterval: RollingInterval.Day)
+                //.CreateLogger();
+                .WriteTo.File(filePath, rollingInterval: RollingInterval.Hour)
+                .WriteTo
+                .MSSqlServer(
+                    connectionString: "Server=.;Database=TestDb;User ID=sa;Password=sa@123;TrustServerCertificate=true;",
+                    sinkOptions: new MSSqlServerSinkOptions { TableName = "Tbl_LogEvent", AutoCreateSqlTable = true })
                 .CreateLogger();
 
 Log.Information("Hello, world!");

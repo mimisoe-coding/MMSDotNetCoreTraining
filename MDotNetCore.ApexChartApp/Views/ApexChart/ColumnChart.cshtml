@@ -1,0 +1,54 @@
+﻿@{
+    ApexChartResponseModel columnChart = ViewBag.columnChart;
+}
+
+<div id="chart"></div>
+@section scripts{
+    <script>
+        let _series = @Html.Raw(JsonConvert.SerializeObject(columnChart.Series));
+        console.log("series  " + _series);
+        let _categories = @Html.Raw(JsonConvert.SerializeObject(columnChart.Categories));
+        var options = {
+            series: _series,
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories:_categories,
+            },
+            yaxis: {
+                title: {
+                    text: '$ (thousands)'
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return "$ " + val + " thousands"
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+}

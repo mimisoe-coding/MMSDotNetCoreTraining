@@ -1,0 +1,41 @@
+﻿@model CanvasJsBarAndColumnResponseModel
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+@section scripts{
+	<script>
+		$(document).ready(function () {
+			var result = @Html.Raw(JsonConvert.SerializeObject(Model));
+			const title = result.Title;
+			const data = result.Data;
+			loadChart(title, data);
+		})
+
+		function loadChart(title, data) {
+			var chart = new CanvasJS.Chart("chartContainer", {
+				animationEnabled: true,
+
+				title: {
+					text: title
+				},
+				axisX: {
+					interval: 1
+				},
+				axisY2: {
+					interlacedColor: "rgba(1,77,101,.2)",
+					gridColor: "rgba(1,77,101,.1)",
+					title: "Number of Companies"
+				},
+				data: [{
+					type: "bar",
+					name: "companies",
+					axisYType: "secondary",
+					color: "#014D65",
+					dataPoints: data
+				}]
+			});
+			chart.render();
+
+		}
+	</script>
+}

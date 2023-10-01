@@ -1,8 +1,14 @@
 using MDotNetCore.RestApi.EFDBContext;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+
+var builderConfig = new ConfigurationBuilder()
+              .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+var configuration = builderConfig.Build();
 
 Console.WriteLine("************************************************Painting Info ********************************************");
 string filePath = Path.Combine("D:\\ace\\serilog", "paintingInfo.txt");
@@ -11,7 +17,10 @@ Log.Logger = new LoggerConfiguration()
                 //.WriteTo.Console()
                 //.WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Hour)
                 .WriteTo.File(filePath, rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+                .WriteTo.MSSqlServer(
+                 connectionString: configuration.GetConnectionString("MSDbConnection"),
+                 sinkOptions: new MSSqlServerSinkOptions { TableName = "Tbl_LogEvent", AutoCreateSqlTable = true })
+                 .CreateLogger();
 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";

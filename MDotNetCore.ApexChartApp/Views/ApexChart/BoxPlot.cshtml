@@ -1,0 +1,38 @@
+﻿@{
+    RangeAreaAndBoxPlotResponseModel boxPlot = ViewBag.data;
+}
+<div id="chart"></div>
+@section scripts{
+    <script>
+        let _data = @Html.Raw(JsonConvert.SerializeObject(boxPlot.dataPoint));
+        var options = {
+            series: [
+                {
+                    type: 'boxPlot',
+                    data: _data
+                }
+            ],
+            chart: {
+                type: 'boxPlot',
+                height: 350
+            },
+            title: {
+                text: 'Basic BoxPlot Chart',
+                align: 'left'
+            },
+            plotOptions: {
+                boxPlot: {
+                    colors: {
+                        upper: '#5C4742',
+                        lower: '#A5978B'
+                    }
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+    </script>
+}

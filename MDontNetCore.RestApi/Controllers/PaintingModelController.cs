@@ -43,7 +43,14 @@ namespace MDotNetCore.RestApi.EFDBContext
                 pageCount++;
 
             _logger.LogInformation(JsonConvert.SerializeObject(lst));
-            return Ok(new { Paintings = lst, PageNo = pageNo, PageCount = pageCount ,PageSize = pageSize});
+            // return Ok(new { Paintings = lst, Data =lst, PageNo = pageNo, PageCount = pageCount ,PageSize = pageSize});
+            return Ok(new PaintingListResponseModel
+            {
+                Data = lst,
+                PageNo = pageNo,
+                PageCount = pageCount,
+                PageSize = pageSize
+            });
         }
 
         [HttpGet("{id}")]
@@ -56,8 +63,7 @@ namespace MDotNetCore.RestApi.EFDBContext
             }
             _logger.LogInformation("************************Edit Painting**********************************");
             _logger.LogInformation(JsonConvert.SerializeObject(item));
-            return Ok(item);
-
+             return Ok(item);
         }
 
         [HttpPost]

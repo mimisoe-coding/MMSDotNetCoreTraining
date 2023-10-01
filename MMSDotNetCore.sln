@@ -18,7 +18,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.MVCApp", "MDotN
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMSDotNetCore.MinimalAPI", "MMSDotNetCore.MinimalAPI\MMSDotNetCore.MinimalAPI.csproj", "{2A1A7616-B072-4929-951F-CEA31C020B48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.SerilogWebApi", "MDotNetCore.SerilogWebApi\MDotNetCore.SerilogWebApi.csproj", "{D838A496-F62D-4806-A0ED-E86C3CCF2C4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.SerilogWebApi", "MDotNetCore.SerilogWebApi\MDotNetCore.SerilogWebApi.csproj", "{D838A496-F62D-4806-A0ED-E86C3CCF2C4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.BlazorServerApp", "MDotNetCore.BlazorServerApp\MDotNetCore.BlazorServerApp.csproj", "{3B8626DE-5860-4447-A76A-C1EEE2943E03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.ApexChartApp", "MDotNetCore.ApexChartApp\MDotNetCore.ApexChartApp.csproj", "{65157409-0095-4528-AF5B-2BF4DC3F4AA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +54,14 @@ Global
 		{D838A496-F62D-4806-A0ED-E86C3CCF2C4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D838A496-F62D-4806-A0ED-E86C3CCF2C4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D838A496-F62D-4806-A0ED-E86C3CCF2C4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B8626DE-5860-4447-A76A-C1EEE2943E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B8626DE-5860-4447-A76A-C1EEE2943E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B8626DE-5860-4447-A76A-C1EEE2943E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B8626DE-5860-4447-A76A-C1EEE2943E03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65157409-0095-4528-AF5B-2BF4DC3F4AA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65157409-0095-4528-AF5B-2BF4DC3F4AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65157409-0095-4528-AF5B-2BF4DC3F4AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65157409-0095-4528-AF5B-2BF4DC3F4AA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
