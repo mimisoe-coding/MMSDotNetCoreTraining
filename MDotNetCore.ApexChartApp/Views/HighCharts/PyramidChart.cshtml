@@ -1,0 +1,58 @@
+﻿@model PyramidChartResponseModel
+<div id="container"></div>
+
+@section scripts{
+        <script>
+            const result = @Html.Raw(JsonConvert.SerializeObject(Model));
+            const title = result.title;
+            const series = result.series;
+
+            console.log("pyramidData "+ series);
+                    Highcharts.chart('container', {
+        chart: {
+            type: 'pyramid'
+        },
+        title: {
+            text:title,
+            x: -50
+        },
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b> ({point.y:,.0f})',
+                    softConnector: true
+                },
+                center: ['40%', '50%'],
+                width: '80%'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        series: series,
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    plotOptions: {
+                        series: {
+                            dataLabels: {
+                                inside: true
+                            },
+                            center: ['50%', '50%'],
+                            width: '100%'
+                        }
+                    }
+                }
+            }]
+        }
+    });
+
+        </script>
+}
+
+

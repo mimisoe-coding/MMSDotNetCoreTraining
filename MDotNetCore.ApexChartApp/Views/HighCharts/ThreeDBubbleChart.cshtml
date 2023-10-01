@@ -1,0 +1,69 @@
+﻿@model ThreeDBubbleChartResponseModel
+
+<div id="container"></div>
+
+@section scripts{
+        <script>
+            const result = @Html.Raw(JsonConvert.SerializeObject(Model));
+            const title = result.title;
+            const firstData = result.dataOne;
+            const secondData = result.dataTwo;
+            console.log("Data "+firstData);
+                Highcharts.chart('container', {
+
+        chart: {
+            type: 'bubble',
+            plotBorderWidth: 1,
+            zoomType: 'xy'
+        },
+
+        title: {
+            text: title,
+            align: 'left'
+        },
+
+        xAxis: {
+            gridLineWidth: 1,
+            accessibility: {
+                rangeDescription: 'Range: 0 to 100.'
+            }
+        },
+
+        yAxis: {
+            startOnTick: false,
+            endOnTick: false,
+            accessibility: {
+                rangeDescription: 'Range: 0 to 100.'
+            }
+        },
+
+        series: [{
+            data: firstData,
+            marker: {
+                fillColor: {
+                    radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                    stops: [
+                        [0, 'rgba(255,255,255,0.5)'],
+                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0.5).get('rgba')]
+                    ]
+                }
+            }
+        }, {
+            data: secondData,
+            marker: {
+                fillColor: {
+                    radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
+                    stops: [
+                        [0, 'rgba(255,255,255,0.5)'],
+                        [1, Highcharts.color(Highcharts.getOptions().colors[1]).setOpacity(0.5).get('rgba')]
+                    ]
+                }
+            }
+        }]
+
+    });
+
+
+        </script>
+}
+
