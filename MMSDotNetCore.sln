@@ -22,7 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.SerilogWebApi",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.BlazorServerApp", "MDotNetCore.BlazorServerApp\MDotNetCore.BlazorServerApp.csproj", "{3B8626DE-5860-4447-A76A-C1EEE2943E03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.ApexChartApp", "MDotNetCore.ApexChartApp\MDotNetCore.ApexChartApp.csproj", "{65157409-0095-4528-AF5B-2BF4DC3F4AA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.ApexChartApp", "MDotNetCore.ApexChartApp\MDotNetCore.ApexChartApp.csproj", "{65157409-0095-4528-AF5B-2BF4DC3F4AA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.ChatApp", "MDotNetCore.ChatApp\MDotNetCore.ChatApp.csproj", "{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +64,10 @@ Global
 		{65157409-0095-4528-AF5B-2BF4DC3F4AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65157409-0095-4528-AF5B-2BF4DC3F4AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65157409-0095-4528-AF5B-2BF4DC3F4AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
