@@ -24,7 +24,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.BlazorServerApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.ApexChartApp", "MDotNetCore.ApexChartApp\MDotNetCore.ApexChartApp.csproj", "{65157409-0095-4528-AF5B-2BF4DC3F4AA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.ChatApp", "MDotNetCore.ChatApp\MDotNetCore.ChatApp.csproj", "{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.ChatApp", "MDotNetCore.ChatApp\MDotNetCore.ChatApp.csproj", "{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.RealTimeChartApp", "MDotNetCore.RealTimeChartApp\MDotNetCore.RealTimeChartApp.csproj", "{76C341CB-CBF3-4AF6-88C8-824919E6AAC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +70,10 @@ Global
 		{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76C341CB-CBF3-4AF6-88C8-824919E6AAC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76C341CB-CBF3-4AF6-88C8-824919E6AAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76C341CB-CBF3-4AF6-88C8-824919E6AAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76C341CB-CBF3-4AF6-88C8-824919E6AAC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
