@@ -12,6 +12,7 @@ namespace MDotNetCore.RestApi.EFDBContext
 {
     public class AppDbContext:DbContext
     {
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 

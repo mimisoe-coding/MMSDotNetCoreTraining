@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.RestApi", "MDontNetCore.RestApi\MDotNetCore.RestApi.csproj", "{2EB9827E-5D0E-4A33-8B76-5F2F9A1D7DAD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATM", "ATM\ATM.csproj", "{642F05CD-FC27-471E-B030-E3E3F18CDE1A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.MVCApp", "MDotNetCore.MVCApp\MDotNetCore.MVCApp.csproj", "{24DACD6A-17A5-43C6-928D-84DD10960FE7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMSDotNetCore.MinimalAPI", "MMSDotNetCore.MinimalAPI\MMSDotNetCore.MinimalAPI.csproj", "{2A1A7616-B072-4929-951F-CEA31C020B48}"
@@ -22,7 +20,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.SerilogWebApi",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.BlazorServerApp", "MDotNetCore.BlazorServerApp\MDotNetCore.BlazorServerApp.csproj", "{3B8626DE-5860-4447-A76A-C1EEE2943E03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.ApexChartApp", "MDotNetCore.ApexChartApp\MDotNetCore.ApexChartApp.csproj", "{65157409-0095-4528-AF5B-2BF4DC3F4AA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.ApexChartApp", "MDotNetCore.ApexChartApp\MDotNetCore.ApexChartApp.csproj", "{65157409-0095-4528-AF5B-2BF4DC3F4AA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.EFCoreDbFirstTesting", "MDotNetCore.EFCoreDbFirstTesting\MDotNetCore.EFCoreDbFirstTesting.csproj", "{1E8FCFA6-0EBE-41EB-AB60-14119682D819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.DbService", "MDotNetCore.DbService\MDotNetCore.DbService.csproj", "{C31E8C4F-E8FA-4DFF-9481-BE2F5CE3E5EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,10 +40,6 @@ Global
 		{2EB9827E-5D0E-4A33-8B76-5F2F9A1D7DAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EB9827E-5D0E-4A33-8B76-5F2F9A1D7DAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EB9827E-5D0E-4A33-8B76-5F2F9A1D7DAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{642F05CD-FC27-471E-B030-E3E3F18CDE1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{642F05CD-FC27-471E-B030-E3E3F18CDE1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{642F05CD-FC27-471E-B030-E3E3F18CDE1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{642F05CD-FC27-471E-B030-E3E3F18CDE1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{24DACD6A-17A5-43C6-928D-84DD10960FE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{24DACD6A-17A5-43C6-928D-84DD10960FE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24DACD6A-17A5-43C6-928D-84DD10960FE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -62,6 +60,14 @@ Global
 		{65157409-0095-4528-AF5B-2BF4DC3F4AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65157409-0095-4528-AF5B-2BF4DC3F4AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65157409-0095-4528-AF5B-2BF4DC3F4AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E8FCFA6-0EBE-41EB-AB60-14119682D819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E8FCFA6-0EBE-41EB-AB60-14119682D819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E8FCFA6-0EBE-41EB-AB60-14119682D819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E8FCFA6-0EBE-41EB-AB60-14119682D819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C31E8C4F-E8FA-4DFF-9481-BE2F5CE3E5EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C31E8C4F-E8FA-4DFF-9481-BE2F5CE3E5EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C31E8C4F-E8FA-4DFF-9481-BE2F5CE3E5EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C31E8C4F-E8FA-4DFF-9481-BE2F5CE3E5EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

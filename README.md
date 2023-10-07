@@ -1,3 +1,23 @@
+https://www.entityframeworktutorial.net/efcore/create-model-for-existing-database-in-ef-core.aspx
+Scaffold-DbContext [-Connection] [-Provider] [-OutputDir] [-Context] [-Schemas>] [-Tables>] 
+                    [-DataAnnotations] [-Force] [-Project] [-StartupProject] [<CommonParameters>]
+
+Scaffold-DbContext "Server=.;Database=MNOTDotNetCore;User ID=sa;Password=sa@123;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir AppDbContextModels -Context AppDbContext -Force
+
+https://itecnote.com/tecnote/asp-net-mvc-can-we-scaffold-dbcontext-from-selected-tables-of-an-existing-database/ database first for many tables
+
+
+
+https://socket.io/
+
+https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+
+https://learn.microsoft.com/en-us/aspnet/core/tutorials/signalr?view=aspnetcore-7.0&tabs=visual-studio
+
+client => Invoke [Connection] => ServerReceiveMessage [Server ChatHub] => server => ClientReceiveMessage => client
+client => Ajax [Client]       => Controller [Server Controller]        => server => ClientReceiveMessage => Client
+
+
 > pagination 
 
 ```

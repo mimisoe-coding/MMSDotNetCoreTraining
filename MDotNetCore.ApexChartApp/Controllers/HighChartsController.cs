@@ -72,9 +72,5 @@ namespace MDotNetCore.ApexChartApp.Controllers
             return View(model);
         }
 
-        public  IActionResult SplineChart()
-        {
-            return View(model);
-        }
     }
 }
