@@ -1,0 +1,107 @@
+﻿
+<div class="container">
+    <div class="row p-1">
+        <div class="col-1">Label</div>
+        <div class="col-5"><input type="text" id="txtLabel" /></div>
+    </div>
+    <div class="row p-1">
+        <div class="col-1">Series</div>
+        <div class="col-5"><input type="text" class="w-100" id="txtSeries" /></div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6 text-end">
+            <input type="button" id="btnSave" value="Save" />
+        </div>
+    </div>
+    <div id="chart"></div>
+</div>
+
+@section scripts{
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script>
+        $('#btnSave').prop("disabled", true);
+
+        var connection = new signalR.HubConnectionBuilder().withUrl("/notificationHub").build();
+
+        // connection.on("ReceiveMessage", function (labels, series) {
+        //     loadChart(labels, series);
+        // });
+
+        connection.on("ReceiveMessage", function (data) {
+            console.log({ data });
+            loadChart(data.labels, data.series);
+        });
+
+        connection.start().then(function () {
+            $('#btnSave').prop("disabled", false);
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        function loadChart(labels, series) {
+            $('#chart').html('');
+
+            let _series = series;
+            let _labels = labels;
+
+            var options = {
+                series: _series,
+                chart: {
+                    width: 380,
+                    type: 'pie',
+                },
+                labels: _labels,
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+        }
+
+        $('#btnSave').click(function () {
+            let label = $('#txtLabel').val();
+            let series = $('#txtSeries').val();
+            let reqModel = {
+                Label: label,
+                Series: series
+            };
+            $.ajax({
+                url: '/Chart/save',
+                type: 'POST',
+                data: {
+                    data: reqModel
+                },
+                success: function (data) {
+                    if (data.isSuccess) {
+                        Swal.fire({
+                            title: 'Success',
+                            text: data.message,
+                            icon: 'success',
+                            showCancelButton: false,
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: data.message,
+                            icon: 'error',
+                            showCancelButton: false,
+                        });
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(request.responseText);
+                }
+            });
+        })
+    </script>
+}
