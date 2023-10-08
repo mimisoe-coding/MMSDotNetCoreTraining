@@ -24,11 +24,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.ApexChartApp", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.ChatApp", "MDotNetCore.ChatApp\MDotNetCore.ChatApp.csproj", "{9D053BD7-805A-4FA0-B892-FD3A25B9FEEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.RealTimeChartApp", "MDotNetCore.RealTimeChartApp\MDotNetCore.RealTimeChartApp.csproj", "{76C341CB-CBF3-4AF6-88C8-824919E6AAC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDotNetCore.RealTimeChartApp", "MDotNetCore.RealTimeChartApp\MDotNetCore.RealTimeChartApp.csproj", "{76C341CB-CBF3-4AF6-88C8-824919E6AAC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.EFCoreDbFirstTesting", "MDotNetCore.EFCoreDbFirstTesting\MDotNetCore.EFCoreDbFirstTesting.csproj", "{1E8FCFA6-0EBE-41EB-AB60-14119682D819}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.DbService", "MDotNetCore.DbService\MDotNetCore.DbService.csproj", "{C31E8C4F-E8FA-4DFF-9481-BE2F5CE3E5EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDotNetCore.ThemeApp", "MDotNetCore.ThemeApp\MDotNetCore.ThemeApp.csproj", "{8B5E26EB-0027-4FDF-B8D2-9F8F79F77A64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +82,10 @@ Global
 		{C31E8C4F-E8FA-4DFF-9481-BE2F5CE3E5EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C31E8C4F-E8FA-4DFF-9481-BE2F5CE3E5EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C31E8C4F-E8FA-4DFF-9481-BE2F5CE3E5EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B5E26EB-0027-4FDF-B8D2-9F8F79F77A64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B5E26EB-0027-4FDF-B8D2-9F8F79F77A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B5E26EB-0027-4FDF-B8D2-9F8F79F77A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B5E26EB-0027-4FDF-B8D2-9F8F79F77A64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
